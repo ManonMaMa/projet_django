@@ -1,0 +1,7 @@
+services:
+  db:
+    image: mariadb
+  django:
+    image: python 3
+    volumes:
+      - ./projet_django:/app
