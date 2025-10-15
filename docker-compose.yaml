@@ -1,7 +1,41 @@
 services:
-  db:
+  mariadb:
     image: mariadb
-  django:
-    image: python 3
     volumes:
-      - ./projet_django:/app
+      - "mariadb_data:/var/lib/mysql:rw"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      start_interval: 3s
+      start_period: 15s
+      interval: 2m
+      retries: 3
+      timeout: 5s
+    
+  django:
+    image: python3
+    build:
+      context: docker
+    volumes:
+      - .:/app
+    environment:
+      DB_NAME:
+      DB_USER:
+      DB_PASSWORD:
+      DB_HOST: mariadb
+      DB_PORT: 3306
+      DEBUG:
+      SECRET_KEY:
+    ports:
+      - ${PORT}:8000
+    restart: 'on-failure' #pour redemarrer djungo apres une erreur
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
+volumes:
+  mariadb_data:
