@@ -2,6 +2,10 @@
 
 {% block content %}
 
-Bonjour {{name}}
+<ul>
+{% for file in files %}
+    <a href="img/{{file}}"><li>{{file}}</li></a>
+{% endfor %}
+</ul>
 
 {% endblock %}

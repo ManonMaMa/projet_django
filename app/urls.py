@@ -20,5 +20,7 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 from . import views
 
 urlpatterns = [
-    path('', views.index)
+    path('', views.index),
+    path('img/<str:path>', views.details),
+    path('imgfile/<str:path>', views.visu),
 ] + debug_toolbar_urls()
