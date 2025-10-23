@@ -22,10 +22,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.truc_list_view.as_view()),
+    path('', views.truc_list_view.as_view(), name='accueil'),
     path('img/<int:pk>', views.truc_detail_view.as_view()),
     path('imgfile/<int:pk>', views.truc_visu_view.as_view()),
     path('ajouter/', views.MonTrucCreateView.as_view(), name='montruc-ajouter'),
+    path('supprimer/<int:pk>/', views.MonTrucDeleteView.as_view(), name='montruc-supprimer'),
+    path('modifier/<int:pk>/', views.MonTrucUpdateView.as_view(), name='montruc-modifier'),
 ] 
 
 urlpatterns += debug_toolbar_urls()

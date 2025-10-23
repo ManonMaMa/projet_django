@@ -1,0 +1,6 @@
+<h1>Modifier le Truc</h1>
+<form action="/modifier/{{object.id}}/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Enregistrer</button>
+</form>

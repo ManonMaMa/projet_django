@@ -5,6 +5,8 @@
 <ul>
 {% for file in object_list %}
     <a href="img/{{file.id}}"><li>{{file.name}}</li></a>
+    <a href="{% url 'montruc-supprimer' file.id %}">Supprimer</a>
+    <a href="{% url 'montruc-modifier' file.id %}">Modifier</a>
 {% endfor %}
 </ul>
 
