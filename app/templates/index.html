@@ -3,9 +3,17 @@
 {% block content %}
 
 <ul>
-{% for file in files %}
-    <a href="img/{{file}}"><li>{{file}}</li></a>
+{% for file in object_list %}
+    <a href="img/{{file.id}}"><li>{{file.name}}</li></a>
 {% endfor %}
 </ul>
+
+<h1>Ajouter un Truc</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ forms }}
+    <button type="submit">Envoyer</button>
+</form>
+
 
 {% endblock %}

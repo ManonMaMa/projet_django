@@ -18,9 +18,17 @@ from django.contrib import admin
 from django.urls import path
 from debug_toolbar.toolbar import debug_toolbar_urls
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+from .views import MonTrucCreateView
 
 urlpatterns = [
-    path('', views.index),
-    path('img/<str:path>', views.details),
-    path('imgfile/<str:path>', views.visu),
-] + debug_toolbar_urls()
+    path('', views.truc_list_view.as_view()),
+    path('img/<int:pk>', views.truc_detail_view.as_view()),
+    path('imgfile/<int:pk>', views.truc_visu_view.as_view()),
+    path('ajouter/', MonTrucCreateView.as_view(), name='montruc-ajouter'),
+] 
+
+urlpatterns += debug_toolbar_urls()
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
