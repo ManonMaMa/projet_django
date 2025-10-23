@@ -12,6 +12,7 @@ class truc_list_view(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["breadcrumb"] = [('Home', '/')]
+        context["form"] = MonTrucForm()
         return context
 
 class truc_detail_view(DetailView):
@@ -31,4 +32,4 @@ class MonTrucCreateView(CreateView):
     model = MonTruc
     form_class = MonTrucForm
     template_name = 'index.html'
-    success_url = '/merci/'  # Redirection après envoi
+    success_url = '/'  # Redirection après envoi
